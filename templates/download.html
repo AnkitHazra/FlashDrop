@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Download file — QuickShare</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="shell download-shell">
+    <header class="topbar"><a class="brand" href="/"><span class="brand-mark">Q</span> QuickShare</a><span class="top-note"><span class="dot"></span> Temporary link</span></header>
+    {% if error %}
+      <section class="download-card error-card"><div class="large-state-icon">!</div><p class="section-kicker">LINK UNAVAILABLE</p><h1>This share is no longer available.</h1><p class="hero-copy">{{ error }}</p><a class="primary-button" href="/">Share another file <span class="button-arrow">↗</span></a></section>
+    {% else %}
+      <section class="download-card">
+        <div class="download-overline"><span class="success-mark">✓</span><span class="section-kicker">FILE SHARED WITH YOU</span></div>
+        <h1>Your download<br><span>is ready.</span></h1>
+        <p class="hero-copy">This file is available temporarily. Download it before the timer reaches zero.</p>
+        <div class="download-file">
+          <div class="file-symbol large">FILE</div>
+          <div class="file-info"><strong>{{ filename }}</strong><span id="file-size">{{ size_bytes }} bytes</span></div>
+        </div>
+        <div class="countdown-panel download-countdown">
+          <div class="countdown-label-row"><span class="muted-label">LINK EXPIRES IN</span><strong id="countdown">10:00</strong></div>
+          <div class="countdown-track"><div id="countdown-bar"></div></div>
+        </div>
+        <a class="primary-button download-button" id="download-button" href="/api/file/{{ token }}"><span>Download file</span><span class="button-arrow">↓</span></a>
+        <p class="error-message hidden" id="expired-message" role="alert">This link has expired. The file can no longer be downloaded.</p>
+        <p class="privacy-note"><span>◇</span> No account required. Link expires automatically.</p>
+      </section>
+      <script>
+        window.SHARE_EXPIRES_AT = {{ expires_at_ms }};
+        window.SHARE_TOKEN = {{ token | tojson }};
+        window.SHARE_SIZE = {{ size_bytes }};
+      </script>
+      <script src="/static/script.js"></script>
+    {% endif %}
+    <footer><span>QUICKSHARE</span><span>Temporary by design.</span><span>10 MINUTE EXPIRY</span></footer>
+  </main>
+</body>
+</html>

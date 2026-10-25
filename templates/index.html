@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>QuickShare — Temporary file sharing</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/"><span class="brand-mark">Q</span> QuickShare</a>
+      <span class="top-note"><span class="dot"></span> Links expire after 10 minutes</span>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> FAST · PRIVATE · TEMPORARY</div>
+      <h1>Files move.<br><span>Links disappear.</span></h1>
+      <p class="hero-copy">Share a file with anyone, anywhere. No account, no inbox, no clutter. Just a link and a QR code that work for 10 minutes.</p>
+    </section>
+
+    <section class="upload-card" id="upload-card">
+      <div class="card-head">
+        <div>
+          <p class="section-kicker">SEND A FILE</p>
+          <h2>What would you like to share?</h2>
+        </div>
+        <div class="time-chip"><span class="clock-icon">◷</span> 10 MIN</div>
+      </div>
+
+      <form id="upload-form">
+        <label class="dropzone" id="dropzone" for="file-input">
+          <input id="file-input" name="file" type="file" required>
+          <span class="upload-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></span>
+          <span class="drop-title" id="drop-title">Drop your file here</span>
+          <span class="drop-subtitle">or <span class="browse">browse files</span> from your device</span>
+          <span class="file-limit">Maximum file size: {{ max_file_mb }} MB</span>
+        </label>
+
+        <div class="selected-file hidden" id="selected-file">
+          <div class="file-symbol">FILE</div>
+          <div class="file-info"><strong id="selected-name"></strong><span id="selected-size"></span></div>
+          <button type="button" class="icon-button" id="clear-file" aria-label="Remove selected file">×</button>
+        </div>
+
+        <div class="progress-wrap hidden" id="progress-wrap">
+          <div class="progress-top"><span id="progress-label">Uploading your file…</span><span id="progress-percent">0%</span></div>
+          <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+        </div>
+        <p class="error-message hidden" id="error-message" role="alert"></p>
+        <button class="primary-button" id="upload-button" type="submit">
+          <span>Upload and create link</span><span class="button-arrow">↗</span>
+        </button>
+      </form>
+      <p class="privacy-note"><span>◇</span> Files are automatically deleted after 10 minutes.</p>
+    </section>
+
+    <section class="result-card hidden" id="result-card" aria-live="polite">
+      <div class="result-heading"><span class="success-mark">✓</span><div><p class="section-kicker">READY TO SHARE</p><h2>Your file is ready</h2></div></div>
+      <div class="result-grid">
+        <div class="result-main">
+          <div class="countdown-panel">
+            <span class="muted-label">LINK EXPIRES IN</span>
+            <strong id="countdown">10:00</strong>
+            <div class="countdown-track"><div id="countdown-bar"></div></div>
+          </div>
+          <label class="field-label" for="share-url">SHAREABLE LINK</label>
+          <div class="copy-row"><input id="share-url" readonly><button id="copy-button" type="button" class="copy-button">Copy link</button></div>
+          <p class="copy-feedback" id="copy-feedback" aria-live="polite"></p>
+          <a class="primary-button download-preview" id="open-link" target="_blank" rel="noopener">Open download page <span class="button-arrow">↗</span></a>
+        </div>
+        <aside class="qr-panel"><img id="qr-image" alt="QR code for the temporary download link"><p>SCAN TO DOWNLOAD</p><span>Anyone with this code can access the file until it expires.</span></aside>
+      </div>
+      <p class="expiry-note"><span>ⓘ</span> Keep this page open to watch the timer. The link will stop working at expiry.</p>
+    </section>
+
+    <footer><span>QUICKSHARE</span><span>Temporary by design.</span><span>10 MINUTE EXPIRY</span></footer>
+  </main>
+  <script>window.MAX_FILE_BYTES = {{ max_file_mb }} * 1024 * 1024;</script>
+  <script src="/static/script.js"></script>
+</body>
+</html>
