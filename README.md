@@ -1,6 +1,6 @@
-# QuickShare — temporary file sharing
+# FlashDrop — temporary file sharing
 
-QuickShare is a FastAPI application that accepts a file upload, stores file bytes in a temporary server directory, stores metadata in SQLite, and generates a share URL and QR code. Links expire after **10 minutes from the time the upload completes**. Multiple downloads are allowed until expiry.
+FlashDrop is a FastAPI application that accepts a file upload, stores file bytes in a temporary server directory, stores metadata in SQLite, and generates a share URL and QR code. Links expire after **10 minutes from the time the upload completes**. Multiple downloads are allowed until expiry.
 
 ## Features
 
