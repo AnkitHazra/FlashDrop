@@ -1,4 +1,4 @@
-# FlashDrop — temporary file sharing [https://flashdrop-g7qo.onrender.com/]
+# FlashDrop — temporary file sharing 
 
 FlashDrop is a FastAPI application that accepts a file upload, stores file bytes in a temporary server directory, stores metadata in SQLite, and generates a share URL and QR code. Links expire after **10 minutes from the time the upload completes**. Multiple downloads are allowed until expiry.
 
